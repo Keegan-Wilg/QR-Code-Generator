@@ -20,11 +20,14 @@ def gen_button():
   qr_image = ctk.CTkImage(light_image=img,
                            dark_image=img,
                            size=(450, 450))
+  qr_image_label = ctk.CTkLabel(master=window,
+                              image=qr_image,
+                              text="")
+  qr_image_label.pack(side="top",
+                      fill="both",
+                      padx=20)
   qr_image_label.configure(image=qr_image)
   qr_image_label.image = qr_image
-
-# ---- Variables ----
-img = Image.open("blank.png")
 
 # ---- Set Up ----
 window = ctk.CTk()
@@ -68,16 +71,6 @@ slider_container = ctk.CTkFrame(master=window,
 slider_container.pack(side="top",
                       fill="x",
                       padx=10)
-
-# QR Code
-qr_image = ctk.CTkImage(dark_image=img,
-                        size=(450, 450))
-qr_image_label = ctk.CTkLabel(master=window,
-                              image=qr_image,
-                              text="")
-qr_image_label.pack(side="top",
-                    fill="both",
-                    padx=20)
 
 # Generate Button
 gen_button = ctk.CTkButton(master=window,

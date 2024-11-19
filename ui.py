@@ -5,25 +5,7 @@ from PIL import Image
 from io import BytesIO
 
 # ---- Functions ----
-def generate_qr_menu(menu_value):
-  input_value = input_box.get()
-  print(f"Error Correction ({menu_value})\nInput ({input_value})")
-  
-  img = qr_gen.generate(input_value, menu_value)
-  
-  buffer = BytesIO()
-  img.save(buffer, format="PNG")
-  buffer.seek(0)
-  img = Image.open(buffer)
-  
-  qr_image = ctk.CTkImage(light_image=img,
-                           dark_image=img,
-                           size=(450, 450))
-  
-  qr_image_label.configure(image=qr_image)
-  qr_image_label.image = qr_image
-
-def generate_qr_input(*args):
+def generate_qr(*args):
   input_value = input_box.get()
   menu_value = error_correct_input.get()
   print(f"Error Correction ({menu_value})\nInput ({input_value})")
@@ -52,7 +34,7 @@ window.resizable(width=False,
 
 # ---- Variables ----
 input_var = ctk.StringVar()
-input_var.trace_add("write", generate_qr_input)
+input_var.trace_add("write", generate_qr)
 
 # Input and error correction container
 input_error_frame = ctk.CTkFrame(master=window,
@@ -70,7 +52,7 @@ error_correct_input = ctk.CTkOptionMenu(master=input_error_frame,
                                                 "Quartile - 25%",
                                                 "High - 30%"],
                                         width=130,
-                                        command=generate_qr_menu)
+                                        command=generate_qr)
 error_correct_input.pack(side="right",
                          padx=10)
 
